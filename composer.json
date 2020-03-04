@@ -1,5 +1,6 @@
 {
     "name": "elbgoods/eloquent-sync-one-to-many",
+    "type": "library",
     "description": "",
     "keywords": [
         "elbgoods",
@@ -7,13 +8,13 @@
     ],
     "homepage": "https://github.com/elbgoods/laravel-sync-one-to-many",
     "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "Niclas Schirrmeister",
             "email": "nschirrmeister@elbgoods.de",
             "role": "Developer"
-        }, {
+        },
+        {
             "name": "Tom Witkowski",
             "email": "twitkowski@elbgoods.de",
             "role": "Developer"
@@ -29,6 +30,16 @@
         "orchestra/testbench": "^4.0",
         "phpunit/phpunit": "^8.0"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Elbgoods\\SyncOneToMany\\SyncOneToManyServiceProvider"
+            ]
+        }
+    },
     "autoload": {
         "psr-4": {
             "Elbgoods\\SyncOneToMany\\": "src"
@@ -41,6 +52,12 @@
         }
     },
     "scripts": {
+        "post-install-cmd": [
+            "@composer bin all install --ansi"
+        ],
+        "post-update-cmd": [
+            "@composer bin all update --ansi"
+        ],
         "test": [
             "vendor/bin/phpunit",
             "vendor/bin/php-cs-test",
@@ -50,22 +67,6 @@
             "vendor/bin/php-mn-test",
             "vendor/bin/php-stan-test"
         ],
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "post-install-cmd": [
-            "@composer bin all install --ansi"
-        ],
-        "post-update-cmd": [
-            "@composer bin all update --ansi"
-        ]
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Elbgoods\\SyncOneToMany\\SyncOneToManyServiceProvider"
-            ]
-        }
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     }
 }
