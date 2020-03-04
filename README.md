@@ -7,7 +7,7 @@ This package provides the sync function for one to many relations similar to the
 You can install the package via composer:
 
 ```bash
-composer require elbgoods/laravel-sync-one-to-many
+composer require elbgoods/eloquent-sync-one-to-many
 ```
 
 ## Usage
