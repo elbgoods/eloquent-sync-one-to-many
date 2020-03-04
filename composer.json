@@ -1,0 +1,65 @@
+{
+    "name": "elbgoods/laravel-sync-one-to-many",
+    "description": "",
+    "keywords": [
+        "elbgoods",
+        "laravel-sync-one-to-many"
+    ],
+    "homepage": "https://github.com/elbgoods/laravel-sync-one-to-many",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Niclas Schirrmeister",
+            "email": "nschirrmeister@elbgoods.de",
+            "role": "Developer"
+        }, {
+            "name": "Tom Witkowski",
+            "email": "twitkowski@elbgoods.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "elbgoods/ci-test-tools": "^1.6",
+        "orchestra/database": "^4.3",
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Elbgoods\\SyncOneToMany\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Elbgoods\\SyncOneToMany\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit",
+            "vendor/bin/php-cs-test",
+            "vendor/bin/php-tlint-test .",
+            "vendor/bin/php-md-test ./src",
+            "vendor/bin/php-insights-test",
+            "vendor/bin/php-mn-test",
+            "vendor/bin/php-stan-test"
+        ],
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Elbgoods\\SyncOneToMany\\SyncOneToManyServiceProvider"
+            ]
+        }
+    }
+}
