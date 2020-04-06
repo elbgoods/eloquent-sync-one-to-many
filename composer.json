@@ -62,10 +62,10 @@
         "test": [
             "vendor/bin/phpunit",
             "vendor/bin/php-cs-test",
-            "vendor/bin/php-tlint-test .",
+            "vendor/bin/php-tlint-test ./src",
             "vendor/bin/php-md-test ./src",
             "vendor/bin/php-insights-test",
-            "vendor/bin/php-mn-test",
+            "vendor/bin/php-mn-test ./src",
             "vendor/bin/php-stan-test"
         ],
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
