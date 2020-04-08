@@ -47,8 +47,8 @@ $user->tasks()->sync(
 Sync using values by given key as ids
 ``` php
 $user->tasks()->sync([
-    ['task_id' => 1, status' => 'wip', 'priority' => 1],
-    ['task_id' => 4, status' => 'finished', 'priority' => 3],
+    ['task_id' => 1, 'status' => 'wip', 'priority' => 1],
+    ['task_id' => 4, 'status' => 'finished', 'priority' => 3],
 ], [foreign_id_key => 'task_id']);
 ```
 
