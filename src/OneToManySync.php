@@ -21,7 +21,7 @@ class OneToManySync
     public function __construct(HasMany $hasMany, array $idsAndAttributes, array $options)
     {
         $this->hasMany = $hasMany;
-        $this->idsAndAttributes = new IdAndAttributesCollection($idsAndAttributes);
+        $this->idsAndAttributes = new IdAndAttributesCollection($idsAndAttributes, $options);
         $this->options = $options;
     }
 

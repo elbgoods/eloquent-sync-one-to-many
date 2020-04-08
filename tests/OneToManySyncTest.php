@@ -353,4 +353,56 @@ final class OneToManySyncTest extends TestCase
         $this->assertModelEquals($user, $task5->user);
         $this->assertEquals('wip', $task5->status);
     }
+
+    /**
+     * @test
+     */
+    public function it_syncs_model_by_given_key()
+    {
+        $user = factory(User::class)->create();
+        $task1 = factory(Task::class)->create([
+            'user_id' => $user->id,
+            'status' => 'wip',
+        ]);
+        $task2 = factory(Task::class)->create([
+            'user_id' => $user->id,
+            'status' => 'finished',
+        ]);
+        $task3 = factory(Task::class)->create([
+            'user_id' => $user->id,
+            'status' => 'wip',
+        ]);
+        $task4 = factory(Task::class)->create();
+        $task5 = factory(Task::class)->create();
+
+        $result = $user->tasks()->sync([
+            $task1->id => ['task_id' => $task1->id, 'status' => 'finished'],
+            $task2->id => ['task_id' => $task2->id, 'status' => 'finished'],
+            $task4->id => ['task_id' => $task4->id, 'status' => 'wip'],
+            $task5->id => ['task_id' => $task5->id, 'status' => 'wip'],
+        ], [
+            'foreign_id_key' => 'task_id',
+        ]);
+
+        $this->assertAttached([$task4->id, $task5->id], $result);
+        $this->assertChanged([$task1->id, $task2->id], $result);
+        $this->assertDetached([$task3->id], $result);
+
+        $task1->refresh();
+        $task2->refresh();
+        $task3->refresh();
+        $task4->refresh();
+        $task5->refresh();
+
+        $this->assertModelEquals($user, $task1->user);
+        $this->assertEquals('finished', $task1->status);
+        $this->assertModelEquals($user, $task2->user);
+        $this->assertEquals('finished', $task2->status);
+        $this->assertNull($task3->user);
+        $this->assertEquals('wip', $task3->status);
+        $this->assertModelEquals($user, $task4->user);
+        $this->assertEquals('wip', $task4->status);
+        $this->assertModelEquals($user, $task5->user);
+        $this->assertEquals('wip', $task5->status);
+    }
 }
